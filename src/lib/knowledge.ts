@@ -25,4 +25,28 @@ export const knowledgeApi = {
     api.post("/api/transcripts", data),
   getTranscripts: () => api.get("/api/transcripts"),
   deleteTranscript: (uuid: string) => api.delete(`/api/transcripts/${uuid}`),
+
+  // Website sources
+  addWebsite: (data: { url: string; title?: string }) =>
+    api.post("/api/website-sources", data),
+  getWebsites: () => api.get("/api/website-sources"),
+  deleteWebsite: (uuid: string) => api.delete(`/api/website-sources/${uuid}`),
+
+  // Audio sources
+  uploadAudio: (file: File, title: string) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("title", title);
+    return api.post("/api/audio-sources", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  },
+  getAudioSources: () => api.get("/api/audio-sources"),
+  deleteAudio: (uuid: string) => api.delete(`/api/audio-sources/${uuid}`),
+
+  // Sitemap
+  crawlSitemap: (data: { url: string; title?: string; max_pages?: number }) =>
+    api.post("/api/sitemap-sources", data),
+  getSitemaps: () => api.get("/api/sitemap-sources"),
+  deleteSitemap: (uuid: string) => api.delete(`/api/sitemap-sources/${uuid}`),
 };

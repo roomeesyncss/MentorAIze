@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { knowledgeApi } from "@/lib/knowledge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { FileText, StickyNote, Video } from "lucide-react";
+import { FileText, StickyNote, Video, Globe } from "lucide-react";
 
 export default function KnowledgePage() {
   const { data: docs, isLoading: docsLoading } = useQuery({
@@ -53,6 +53,16 @@ export default function KnowledgePage() {
       color: "text-red-600",
       bgColor: "bg-red-50",
     },
+    {
+      title: "Web Sources",
+      description: "Websites, audio & sitemaps",
+      href: "/knowledge/websites",
+      icon: Globe,
+      count: null,
+      loading: false,
+      color: "text-emerald-600",
+      bgColor: "bg-emerald-50",
+    },
   ];
 
   return (
@@ -76,7 +86,7 @@ export default function KnowledgePage() {
                 {card.loading ? (
                   <Skeleton className="h-8 w-16" />
                 ) : (
-                  <div className="text-2xl font-bold">{card.count}</div>
+                  <div className="text-2xl font-bold">{card.count ?? "→"}</div>
                 )}
                 <p className="text-xs text-muted-foreground mt-1">items uploaded</p>
               </CardContent>
